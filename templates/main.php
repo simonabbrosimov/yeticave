@@ -34,7 +34,7 @@
                             <span class="lot__cost"><?=format_number($value["price"]);?></span>
                         </div>
                         <?php $res = get_remaining_time(htmlspecialchars($value["expire_date"]))?>
-                        <div class="lot__timer timer<?php if ($res[0] < 1):?>timer--finishing<?php endif; ?>">
+                        <div class="lot__timer timer<?php if ($res[0] < 1):?> timer--finishing<?php endif; ?>">
                             <?= "$res[0]:$res[1]";?>
                            
                         </div>

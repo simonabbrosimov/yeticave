@@ -35,7 +35,7 @@ $goods = [
         "category" => $categories["boards"],
         "price" => 159999,
         "image" => "img/lot-2.jpg",
-        "expire_date" => '2023-05-13'
+        "expire_date" => '2023-03-13'
 
     ],
 
