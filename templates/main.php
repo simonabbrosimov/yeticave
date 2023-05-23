@@ -1,4 +1,4 @@
-<section class="promo">
+ <section class="promo">
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
        
@@ -8,8 +8,8 @@
                 
             
             <!--заполните этот список из массива категорий-->
-            <li class="promo__item promo__item--<?=$key;?>">
-                <a class="promo__link" href="pages/all-lots.html"><?=$value;?></a>
+            <li class="promo__item promo__item--<?=$value['symbol_code'];?>">
+                <a class="promo__link" href="pages/all-lots.html"><?=$value['title'];?></a>
             </li>
         <?php endforeach; ?>
         </ul>
