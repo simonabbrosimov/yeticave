@@ -78,8 +78,10 @@ $page_content = include_template('main.php', [
 
 $layout_content = include_template('layout.php', [
     'content' => $page_content,
+    'categories' => $categories,
     'user_name' => $user_name,
-    'title' => $title
+    'is_auth' => $is_auth,
+    'title' => 'Главная'
 
 ]);
 
