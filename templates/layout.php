@@ -10,6 +10,7 @@
 <body>
 <div class="page-wrapper">
 
+
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
@@ -22,9 +23,7 @@
         </form>
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
-        <nav class="user-menu">
-
-        <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
+        <nav class="user-menu">    
          <?php if($is_auth): ?>
             <div class="user-menu__logged">
                <p><?= $user_name; ?></p>
@@ -54,8 +53,6 @@
     <nav class="nav">
         <ul class="nav__list container">
             <?php foreach ($categories as $key => $value): ?>
-            
-            <!--заполните этот список из массива категорий-->
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?= $value['title']; ?></a>
             </li>
