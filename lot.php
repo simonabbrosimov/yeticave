@@ -30,7 +30,9 @@ if($id){
 }
 else {
 	http_response_code(404);
-	die();
+    print("Error: ");
+    print(http_response_code());
+    die();
 }
 
 $res = mysqli_query($con, $sql);
@@ -44,10 +46,10 @@ else{
 
 if(!$lot){
 	http_response_code(404);
-	die();
+    print("Error: ");
+    print(http_response_code());
+    die();
 }
-
-
 
 
 $page_content = include_template('lot_main.php', [
@@ -67,4 +69,3 @@ $layout_content = include_template('lot_layout.php', [
 print($layout_content);
 
 
-?>
