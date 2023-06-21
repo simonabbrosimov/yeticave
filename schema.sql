@@ -12,21 +12,19 @@ CREATE TABLE categories (
 
 );
 
-CR\EATE TABLE lots (
+CREATE TABLE lots (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	create_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-	lot_name CHAR (255)
+	title CHAR (255),
 	description TEXT,
 	image CHAR (255),
-	initial_price INT,
-	end_date DATE,
+	price INT,
+	expire_date DATE,
 	step INT,
 	user_id INT,
 	winner_id INT,
-	category_id INT,
-	FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (winner_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+	category_id INT
+	
 
 
 
@@ -37,9 +35,8 @@ CREATE TABLE bets (
 	bet_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	price INT,
 	user_id INT,
-	lot_id INT,
-	FOREIGN KEY (user_id) REFERENCES users(id),
-	FOREIGN KEY  (lot_id) REFERENCES lots(id)
+	lot_id INT
+	
 
 
 );
@@ -53,9 +50,8 @@ CREATE TABLE users (
 	password CHAR(12),
 	contact TEXT,
 	lot_id INT,
-	bet_id INT,
-	FOREIGN KEY (lot_id) REFERENCES lots(id),
-	FOREIGN KEY (bet_id) REFERENCES bets(id)
+	bet_id INT
+	
 
 
 

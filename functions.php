@@ -31,4 +31,50 @@ function get_remaining_time($date){
 
     return $result;
 };
-?>
+
+function validate_category($id, $allowed_list) {
+    if (!in_array ($id, $allowed_list)) {
+        return "Указана несуществующая категория";
+    }
+
+    return null;
+};
+
+function validate_length($value, $min, $max) {
+    if ($value) {
+        $len = strlen($value);
+        if ($len < $min or $len > $max) {
+            return "Значение должно быть от $min до $max символов";
+        }
+    }
+
+    return null;
+};
+
+function validate_number($value, $min){
+    $value = intval($value);
+    if (is_int($value) && $value > $min) {
+        return null;
+    }
+
+     return "Значение должно быть целым числом больше $min";
+};
+
+function validate_date($value){
+  if(date('Y-m-d', strtotime($value)) === $value){
+    $now_date = strtotime("now");
+    $end_date = strtotime($value);
+    $days_count = (floor(($end_date - $now_date)/60/60/24));
+    if($days_count >= 1){
+    echo $days_count;
+    return null;
+    }
+    else{
+       return "Введенная дата должна быть больше текущей";
+    }
+    }
+  else{
+    return "Введенная дата должна быть в формате ГГГГ-ММ-ДД";
+  }
+};
+
