@@ -62,12 +62,11 @@ function validate_number($value, $min){
 
 function validate_date($value){
   if(date('Y-m-d', strtotime($value)) === $value){
-    $now_date = strtotime("now");
+    $now_date = date('Y-m-d');
+    $now_date = strtotime($now_date);
     $end_date = strtotime($value);
-    $days_count = (floor(($end_date - $now_date)/60/60/24));
-    if($days_count >= 1){
-    echo $days_count;
-    return null;
+    if($now_date < $end_date){
+        return null;
     }
     else{
        return "Введенная дата должна быть больше текущей";
