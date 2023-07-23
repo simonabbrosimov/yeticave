@@ -7,22 +7,10 @@ require_once('functions.php');
 $is_auth = rand(0, 1);
 $user_name = 'Simom';
 
-if(!$con){
-	print("Connection error: " . mysqli_connect_error());
-}
-else{
-	$sql = "SELECT title, symbol_code FROM categories";
-	$res = mysqli_query($con, $sql);
-
-	if(!$res){
-		print("MYSQLI error: " . mysqli_error($con));
-	}
-	else {
-		$categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
-	}
-
-}
-
+$sql = "SELECT title, symbol_code FROM categories";
+$res = mysqli_query($con, $sql);
+$categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 if($id){
@@ -30,40 +18,33 @@ if($id){
 }
 else {
 	http_response_code(404);
-    print("Error: ");
-    print(http_response_code());
-    die();
+	print("Error: ");
+	print(http_response_code());
+	die();
 }
 
 $res = mysqli_query($con, $sql);
-
-if($res){
-	$lot = mysqli_fetch_assoc($res);
-}
-else{
-	print("MYSQLI error: " . mysqli_error($con));
-}
+$lot = mysqli_fetch_assoc($res);
 
 if(!$lot){
 	http_response_code(404);
-    print("Error: ");
-    print(http_response_code());
-    die();
+	print("Error: ");
+	print(http_response_code());
+	die();
 }
 
-
 $page_content = include_template('lot_main.php', [
-    'categories' => $categories,
-    'lot' => $lot
+	'categories' => $categories,
+	'lot' => $lot
 
 ]);
 
 $layout_content = include_template('lot_layout.php', [
-    'content' => $page_content,
-    'categories' => $categories,
-    'user_name' => $user_name,
-    'is_auth' => $is_auth,
-    'title' => 'Главная'
+	'content' => $page_content,
+	'categories' => $categories,
+	'user_name' => $user_name,
+	'is_auth' => $is_auth,
+	'title' => 'Главная'
 ]);
 
 print($layout_content);

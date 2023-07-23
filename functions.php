@@ -1,79 +1,95 @@
 <?php
 function format_number($initial_number) {
-    $number = ceil($initial_number);
+	$number = ceil($initial_number);
 
-    if ($number < 1000) {
-        $result = $number;
+	if ($number < 1000) {
+		$result = $number;
 
-    }else {
-        $result = number_format($number, 0, " ", " "); 
-    }
+	}else {
+		$result = number_format($number, 0, " ", " "); 
+	}
 
-    return $result ." ₽";
+	return $result ." ₽";
 
 };
 
 function get_remaining_time($date){
 
-    $end_date = date_create($date);
-    $now_date = date_create("now");
-    $date_diff = date_diff($end_date, $now_date);
-    $hours_count = date_interval_format($date_diff, "%d-%H-%I");
-    $hours_count_arr = explode("-", $hours_count);
-    
-    $hours = $hours_count_arr[0] * 24 + $hours_count_arr[1];
-    $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-    $minutes = intval($hours_count_arr[2]);
-    $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+	$end_date = date_create($date);
+	$now_date = date_create("now");
+	$date_diff = date_diff($end_date, $now_date);
+	$hours_count = date_interval_format($date_diff, "%d-%H-%I");
+	$hours_count_arr = explode("-", $hours_count);
+	
+	$hours = $hours_count_arr[0] * 24 + $hours_count_arr[1];
+	$hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+	$minutes = intval($hours_count_arr[2]);
+	$minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
 
-    $result[] = $hours;
-    $result[] = $minutes;
+	$result[] = $hours;
+	$result[] = $minutes;
 
-    return $result;
+	return $result;
 };
 
 function validate_category($id, $allowed_list) {
-    if (!in_array ($id, $allowed_list)) {
-        return "Указана несуществующая категория";
-    }
+	if (!in_array ($id, $allowed_list)) {
+		return "Указана несуществующая категория";
+	}
 
-    return null;
+	return null;
 };
 
 function validate_length($value, $min, $max) {
-    if ($value) {
-        $len = strlen($value);
-        if ($len < $min or $len > $max) {
-            return "Значение должно быть от $min до $max символов";
-        }
-    }
+	if ($value) {
+		$len = strlen($value);
+		if ($len < $min or $len > $max) {
+			return "Значение должно быть от $min до $max символов";
+		}
+	}
 
-    return null;
+	return null;
 };
 
 function validate_number($value, $min){
-    $value = intval($value);
-    if (is_int($value) && $value > $min) {
-        return null;
-    }
+	$value = intval($value);
+	if (is_int($value) && $value > $min) {
+		return null;
+	}
 
-     return "Значение должно быть целым числом больше $min";
+	 return "Значение должно быть целым числом больше $min";
 };
 
 function validate_date($value){
   if(date('Y-m-d', strtotime($value)) === $value){
-    $now_date = date('Y-m-d');
-    $now_date = strtotime($now_date);
-    $end_date = strtotime($value);
-    if($now_date < $end_date){
-        return null;
-    }
-    else{
-       return "Введенная дата должна быть больше текущей";
-    }
-    }
+	$now_date = date('Y-m-d');
+	$now_date = strtotime($now_date);
+	$end_date = strtotime($value);
+	if($now_date < $end_date){
+		return null;
+	}
+	else{
+	   return "Введенная дата должна быть больше текущей";
+	}
+	}
   else{
-    return "Введенная дата должна быть в формате ГГГГ-ММ-ДД";
+	return "Введенная дата должна быть в формате ГГГГ-ММ-ДД";
   }
 };
 
+function validate_email($value, $allowed_list) {
+	$email = filter_var($value, FILTER_VALIDATE_EMAIL);
+	if($email){
+		if (in_array ($value, $allowed_list)) {
+			return "Пользователь с данным e-mail уже зарегистрирован";
+	}	
+  	else {
+  		return null;
+  	}
+
+	}
+	else {
+		return "Введите правильный e-mail";
+	}	
+	
+};

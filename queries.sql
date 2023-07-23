@@ -20,15 +20,15 @@ VALUES
 	('2014 Rossignol District Snowboard', 10999, 'img/lot-1.jpg', '2023-04-01', 1000, 1, 2),
 	('DC Ply Mens 2016/2017 Snowboard', 159999,  'img/lot-2.jpg', '2023-03-13', 1000, 1, 2),
 	('Крепления Union Contact Pro 2015 года размер L/XL', 8000, 'img/lot-3.jpg','2023-05-07', 1000, 2, 2),
-    ('Ботинки для сноуборда DC Mutiny Charocal', 10900, 'img/lot-4.jpg', '2023-04-01', 1000, 3, 1),
+	('Ботинки для сноуборда DC Mutiny Charocal', 10900, 'img/lot-4.jpg', '2023-04-01', 1000, 3, 1),
 	('Куртка для сноуборда DC Mutiny Charocal', 5000, 'img/lot-5.jpg', '2023-04-22', 1000, 4, 1),
 	('Маска Oakley Canopy', 5000, 'img/lot-6.jpg', '2023-03-25', 1000, 6, 1);
 
 #добавляю ставку
 INSERT INTO bets (price, user_id, lot_id)
 VALUES
-    (6000, 2, 5),
-    (11999, 1, 1);
+	(6000, 2, 5),
+	(11999, 1, 1);
 	
 
 
