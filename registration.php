@@ -3,17 +3,14 @@ require_once('helpers.php');
 require_once('init.php');
 require_once('functions.php');
 
-
+if(!isset($_SESSION['user'])){
 
 $sql = "SELECT id, title, symbol_code FROM categories";
-$res = mysqli_query($con, $sql);
-$categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
+$categories = db_get_rows($con, $sql);
 
 $sql = "SELECT user_email, user_name FROM users";
-$res = mysqli_query($con, $sql);
-$users = mysqli_fetch_all($res, MYSQLI_ASSOC);
-$emails = array_column($users, 'user_email');
-
+$column = 'user_email';
+$emails = db_get_column($con, $sql, $column);
 
 $page_content = include_template('reg_main.php', [
 	'categories' => $categories
@@ -69,7 +66,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
 		$sql = "INSERT INTO users (user_email, password, user_name, contact) VALUES (?, ?, ?, ?);";
 		$stmt = db_get_prepare_stmt($con, $sql, $new_user);
 		$res = mysqli_stmt_execute($stmt);
-		header("Location: pages/login.html");
+		header("Location: login.php");
 		
 	} 
 
@@ -90,3 +87,7 @@ $layout_content = include_template('reg_layout.php', [
 ]);
 
 print($layout_content);
+}
+else {
+	header("Location: /");
+}

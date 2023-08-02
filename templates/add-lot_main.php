@@ -8,7 +8,7 @@
 					<input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?= htmlspecialchars($new_lot['lot-name'], ENT_QUOTES);?>">
 					<?php if(isset($errors['lot-name'])) :?>
 					<span class="form__error"><?=$errors['lot-name'];?></span>
-				    <?php endif;?>
+					<?php endif;?>
 				</div>
 				<?php $classname = isset($errors['category']) ? "form__item--invalid" : "" ;?>  
 				<div class="form__item <?=$classname ;?>">
@@ -31,7 +31,7 @@
 				<textarea id="message" name="message" placeholder="Напишите описание лота" ><?=htmlspecialchars($new_lot['message'], ENT_QUOTES);?> </textarea>
 				<?php if(isset($errors['message'])) :?>
 				<span class="form__error"><?=$errors['message'] ;?></span>
-		        <?php endif; ?>
+				<?php endif; ?>
 			</div>
 			<?php $classname = isset($errors['lot-img']) ? "form__item--invalid" : "" ;?> 
 			<div class="form__item form__item--file <?=$classname ;?>">
@@ -50,7 +50,7 @@
 					<input id="lot-rate" type="text" name="lot-rate" placeholder="0" value="<?=htmlspecialchars($new_lot['lot-rate'], ENT_QUOTES);?>">
 					<?php if(isset($errors['lot-rate'])) :?>
 					<span class="form__error"><?=$errors['lot-rate'] ;?></span>
-				    <?php endif; ?>
+					<?php endif; ?>
 				</div>
 				<?php $classname = isset($errors['lot-step']) ? "form__item--invalid" : "" ;?> 
 				<div class="form__item form__item--small <?=$classname ;?>">
@@ -58,7 +58,7 @@
 					<input id="lot-step" type="text" name="lot-step" placeholder="0" value="<?=htmlspecialchars($new_lot['lot-step'], ENT_QUOTES);?>">
 					<?php if(isset($errors['lot-step'])) :?>
 					<span class="form__error"><?=$errors['lot-step'] ;?></span>
-				    <?php endif; ?>
+					<?php endif; ?>
 				</div>
 				<?php $classname = isset($errors['lot-date']) ? "form__item--invalid" : "" ;?> 
 				<div class="form__item <?=$classname ;?>">
@@ -66,7 +66,7 @@
 					<input class="form__input-date" id="lot-date" type="text" name="lot-date" placeholder="Введите дату в формате ГГГГ-ММ-ДД" value="<?=htmlspecialchars($new_lot['lot-date'], ENT_QUOTES);?>">
 					<?php if(isset($errors['lot-date'])) :?>
 					<span class="form__error"><?=$errors['lot-date'] ;?></span>
-				    <?php endif; ?>
+					<?php endif; ?>
 					 </div>
 			</div>
 		 

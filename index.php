@@ -4,18 +4,15 @@ require_once('helpers.php');
 require_once('init.php');
 require_once('functions.php');
 
-$is_auth = rand(0, 1);
-$user_name = 'Simom';
+
 
 $sql = "SELECT lots.id, lots.title, lots.price, lots.image, lots.expire_date
 FROM lots JOIN categories ON lots.category_id=categories.id 
 WHERE lots.expire_date > now()";
-$res = mysqli_query($con, $sql);
-$goods = mysqli_fetch_all($res, MYSQLI_ASSOC);
+$goods = db_get_rows($con, $sql);
 	
 $sql = "SELECT symbol_code, title FROM categories";
-$res = mysqli_query($con, $sql);
-$categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
+$categories = db_get_rows($con, $sql);
 
 $page_content = include_template('main.php', [
 	'categories' => $categories,
@@ -27,7 +24,6 @@ $layout_content = include_template('layout.php', [
 	'content' => $page_content,
 	'categories' => $categories,
 	'user_name' => $user_name,
-	'is_auth' => $is_auth,
 	'title' => 'Главная'
 
 ]);

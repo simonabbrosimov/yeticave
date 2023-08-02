@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title><?= $title ;?></title>
+	<title><?=$title;?></title>
 	<link href="../css/normalize.min.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 </head>
@@ -35,7 +35,16 @@
 	</header>
 
 	<main>
-		<?=$content ;?>
+		<nav class="nav">
+		<ul class="nav__list container">
+			<?php foreach ($categories as $key => $value): ?>
+			<li class="nav__item">
+				<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+	</nav>
+	 <?=$content?>
 	</main>
 
 </div>
@@ -43,12 +52,12 @@
 <footer class="main-footer">
 	<nav class="nav">
 		<ul class="nav__list container">
-				<?php foreach ($categories as $key => $value): ?>
-						<li class="nav__item">
-								<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
-						</li>
-				<?php endforeach; ?>
-			</ul>
+			<?php foreach ($categories as $key => $value): ?>
+			<li class="nav__item">
+				<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
+			</li>
+		<?php endforeach; ?>
+		</ul>
 	</nav>
 	<div class="main-footer__bottom container">
 		<div class="main-footer__copyright">

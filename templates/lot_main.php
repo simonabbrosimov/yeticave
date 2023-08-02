@@ -7,6 +7,7 @@
 					<p class="lot-item__category">Категория: <span><?=htmlspecialchars($lot['category_title'], ENT_QUOTES);?></span></p>
 					<p class="lot-item__description"><?=htmlspecialchars($lot['description'], ENT_QUOTES);?></p>
 				</div>
+				<?php if(isset($_SESSION['name'])) :?>
 				<div class="lot-item__right">
 					<div class="lot-item__state">
 					 <?php $res = get_remaining_time(htmlspecialchars($lot["expire_date"]), ENT_QUOTES);?>
@@ -22,6 +23,7 @@
 								Мин. ставка <span>12 000 р</span>
 							</div>
 						</div>
+					<?php endif;?>
 						<!--
 						<form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post" autocomplete="off">
 							<p class="lot-item__form-item form__item form__item--invalid">

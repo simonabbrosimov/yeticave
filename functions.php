@@ -61,7 +61,7 @@ function validate_number($value, $min){
 };
 
 function validate_date($value){
-  if(date('Y-m-d', strtotime($value)) === $value){
+	if(date('Y-m-d', strtotime($value)) === $value){
 	$now_date = date('Y-m-d');
 	$now_date = strtotime($now_date);
 	$end_date = strtotime($value);
@@ -69,13 +69,26 @@ function validate_date($value){
 		return null;
 	}
 	else{
-	   return "Введенная дата должна быть больше текущей";
+		 return "Введенная дата должна быть больше текущей";
 	}
 	}
-  else{
+	else{
 	return "Введенная дата должна быть в формате ГГГГ-ММ-ДД";
-  }
+	}
 };
+
+function db_get_rows($con, $sql){
+	$res = mysqli_query($con, $sql);
+	return mysqli_fetch_all($res, MYSQLI_ASSOC); 
+	};
+
+function db_get_column($con, $sql, $column){
+	$res = mysqli_query($con, $sql);
+	$cat = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return array_column($cat, $column); 
+	
+};
+
 
 function validate_email($value, $allowed_list) {
 	$email = filter_var($value, FILTER_VALIDATE_EMAIL);
@@ -83,13 +96,34 @@ function validate_email($value, $allowed_list) {
 		if (in_array ($value, $allowed_list)) {
 			return "Пользователь с данным e-mail уже зарегистрирован";
 	}	
-  	else {
-  		return null;
-  	}
+		else {
+			return null;
+		}
 
 	}
 	else {
 		return "Введите правильный e-mail";
 	}	
 	
+};
+
+function check_email($value) {
+	$email = filter_var($value, FILTER_VALIDATE_EMAIL);
+	if(!$email){
+		return "Введите правильный e-mail";
+	}	
+	else {
+		return null;
+	}
+};
+
+function get_data($con, $email) {
+	$sql = "SELECT id, user_email, user_name, password FROM users WHERE user_email=?";
+	$stmt = mysqli_prepare($con, $sql);
+	mysqli_stmt_bind_param($stmt, 's', $email);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$user_data = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
+	
+	return $user_data;
 };

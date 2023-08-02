@@ -3,12 +3,12 @@ require_once('helpers.php');
 require_once('init.php');
 require_once('functions.php');
 
-$user_name = 'Simom';
 
+if(isset($_SESSION['name'])){
 $sql = "SELECT id, title, symbol_code FROM categories";
-$res = mysqli_query($con, $sql);
-$categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
-$categories_id = array_column($categories, 'id');
+$categories = db_get_rows($con, $sql);
+$column = 'id';
+$categories_id = db_get_column($con, $sql, $column);
 
 $page_content = include_template('add-lot_main.php', [
 	'categories' => $categories
@@ -92,8 +92,8 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
 		]);
 	} 
 	else {
-		
-		$sql = "INSERT INTO lots (title, category_id, description, price, step, expire_date, image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, 1);";
+		$new_lot['user_id'] = $_SESSION['id'];
+		$sql = "INSERT INTO lots (title, category_id, description, price, step, expire_date, image, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		$stmt = db_get_prepare_stmt($con, $sql, $new_lot);
 		$res = mysqli_stmt_execute($stmt);
 		$lot_id = mysqli_insert_id($con);
@@ -119,3 +119,10 @@ $layout_content = include_template('add-lot_layout.php', [
 ]);
 
 print($layout_content);
+}
+else {
+	http_response_code(403);
+	print("Error: ");
+	print(http_response_code());
+	die();
+}
