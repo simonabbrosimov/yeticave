@@ -9,7 +9,6 @@ CREATE TABLE categories (
 	title CHAR(255),
 	symbol_code CHAR(255)
 
-
 );
 
 CREATE TABLE lots (
@@ -24,9 +23,6 @@ CREATE TABLE lots (
 	user_id INT,
 	winner_id INT,
 	category_id INT
-	
-
-
 
 );
 
@@ -36,11 +32,8 @@ CREATE TABLE bets (
 	price INT,
 	user_id INT,
 	lot_id INT
-	
-
 
 );
-
 
 CREATE TABLE users (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,10 +45,6 @@ CREATE TABLE users (
 	lot_id INT,
 	bet_id INT
 	
-
-
-
-
-
-
 );
+
+ALTER TABLE lots ADD FULLTEXT(title, description);

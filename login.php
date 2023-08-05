@@ -2,6 +2,7 @@
 require_once('helpers.php');
 require_once('init.php');
 require_once('functions.php');
+require_once('data.php');
 
 $sql = "SELECT id, title, symbol_code FROM categories";
 $categories = db_get_rows($con, $sql);

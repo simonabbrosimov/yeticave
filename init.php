@@ -11,4 +11,3 @@ if (!file_exists('config.php')) {
 $con = mysqli_connect($db_host, $db_username, $db_password, $db_database);
 mysqli_set_charset($con, $db_charset);
 
-$user_name = $_SESSION['name'];
