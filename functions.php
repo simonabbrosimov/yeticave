@@ -60,6 +60,23 @@ function validate_number($value, $min){
 	 return "Значение должно быть целым числом больше $min";
 };
 
+
+function get_bets_history ($con, $id_lot) {
+	$sql = "SELECT users.user_name, bets.price, DATE_FORMAT(bet_date, '%d.%m.%y %H:%i') AS bet_date
+	FROM bets
+	JOIN lots ON bets.lot_id=lots.id
+	JOIN users ON bets.user_id=users.id
+	WHERE lots.id=$id_lot
+	ORDER BY bets.bet_date DESC LIMIT 10;";
+	$result = mysqli_query($con, $sql);
+	$list_bets = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		
+	return $list_bets;
+	}
+	
+
+
+
 function validate_date($value){
 	if(date('Y-m-d', strtotime($value)) === $value){
 	$now_date = date('Y-m-d');
@@ -124,6 +141,15 @@ function get_data($con, $email) {
 	mysqli_stmt_execute($stmt);
 	$res = mysqli_stmt_get_result($stmt);
 	$user_data = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
+	
+	return $user_data;
+};
+
+function db_get_data($con, $sql, $data) {
+	$stmt = db_get_prepare_stmt($con, $sql, $data);
+	mysqli_stmt_execute($stmt);
+	$res = mysqli_stmt_get_result($stmt);
+	$user_data = $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : null;
 	
 	return $user_data;
 };

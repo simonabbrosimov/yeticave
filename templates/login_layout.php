@@ -39,7 +39,7 @@
 		<ul class="nav__list container">
 			<?php foreach ($categories as $key => $value): ?>
 			<li class="nav__item">
-				<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
+				<a href="../category.php?id=<?=$value['id'];?>"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
 			</li>
 		<?php endforeach; ?>
 		</ul>
@@ -54,7 +54,7 @@
 		<ul class="nav__list container">
 			<?php foreach ($categories as $key => $value): ?>
 			<li class="nav__item">
-				<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
+				<a href="../category.php?id=<?=$value['id'];?>"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
 			</li>
 		<?php endforeach; ?>
 		</ul>

@@ -5,7 +5,7 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
-$sql = "SELECT symbol_code, title FROM categories";
+$sql = "SELECT id, symbol_code, title FROM categories";
 $categories = db_get_rows($con, $sql);
 
 $search = $_GET['search'] ?? '';
@@ -15,10 +15,7 @@ if($search){
 	FROM lots JOIN categories ON lots.category_id=categories.id 
 	WHERE  MATCH (lots.title, lots.description) AGAINST (?) AND lots.expire_date > now()";
 
-	$stmt = db_get_prepare_stmt($con, $sql, [$search]);
-	mysqli_stmt_execute($stmt);
-	$result = mysqli_stmt_get_result($stmt);
-	$goods = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	$goods = db_get_data($con, $sql, [$search]);
 
 	$page_content = include_template('search_main.php', [
 	'categories' => $categories,
@@ -44,7 +41,7 @@ $layout_content = include_template('search_layout.php', [
 
 print($layout_content);
 
-?>
+
 
 
 	   

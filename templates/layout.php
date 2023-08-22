@@ -27,7 +27,7 @@
 		 <?php if(isset($_SESSION['name'])): ?>
 			<div class="user-menu__logged">
 				<p><?= htmlspecialchars($user_name, ENT_QUOTES); ?></p>
-				<a  class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
+				<a  class="user-menu__bets" href="../my_bets.php">Мои ставки</a>
 				<a  class="user-menu__logout" href="../logout.php">Выход</a>
 			</div>
 		 <?php else: ?>
@@ -36,7 +36,7 @@
 				  <a href="../registration.php">Регистрация</a>
 				</li>
 				<li class="user-menu__item">
-				  <a href="#">Выход</a>
+				  <a href="../login.php">Вход</a>
 				</li>
 			</ul>
 		 <?php endif; ?>      
@@ -54,7 +54,7 @@
 		<ul class="nav__list container">
 			<?php foreach ($categories as $key => $value): ?>
 			<li class="nav__item">
-				<a href="pages/all-lots.html"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
+				<a href="../category.php?id=<?=$value['id'];?>"><?= htmlspecialchars($value['title'], ENT_QUOTES); ?></a>
 			</li>
 		<?php endforeach; ?>
 		</ul>
